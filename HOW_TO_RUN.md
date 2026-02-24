@@ -17,15 +17,15 @@ spring.datasource.password=abi@1234
 
 If your MySQL password is different, update it.
 
-## Step 3: Run the Application
+## Step 3: Build and Run
 
 In your terminal (PowerShell), run:
 
 ```bash
-mvn spring-boot:run
+mvn clean spring-boot:run
 ```
 
-Wait for the message: `Started CarbonPersonalFootprintAppApplication`
+Wait for: `Started CarbonPersonalFootprintAppApplication`
 
 ## Step 4: Open Browser
 
@@ -35,7 +35,7 @@ You should see the home page with Login and Register buttons.
 
 ---
 
-## 🔐 Test Login
+## 🔐 Login Credentials
 
 ### User Account
 - Email: `user@cpfa.com`
@@ -47,41 +47,47 @@ You should see the home page with Login and Register buttons.
 
 ---
 
-## ✅ What to Test
+## ✅ Features to Test
 
-1. **Home Page** - Should load without 403 error
-2. **Register** - Create a new account
-3. **Login as User** - Test user features
-4. **Login as Admin** - Test admin features
-5. **Calculate Emissions** - Add carbon log
-6. **View History** - See your logs
-7. **Take Survey** - Submit survey
+1. **Home Page** - Beautiful gradient design
+2. **Register** - Create new account
+3. **User Login** - Access user dashboard (blue theme)
+4. **Calculate Emissions** - Enter data and see results
+5. **View History** - See all your logs
+6. **Take Survey** - Submit lifestyle survey
+7. **Admin Login** - Access admin dashboard (red theme)
+8. **View Users** - See all registered users
+9. **View Logs** - Monitor all emissions
+10. **View Surveys** - Check responses
 
 ---
 
-## 🐛 If You Get Errors
-
-### 403 Forbidden Error
-- Restart the application: Stop (Ctrl+C) and run `mvn spring-boot:run` again
+## 🐛 Troubleshooting
 
 ### Database Connection Error
-- Make sure MySQL is running
-- Check username/password in application.properties
-- Verify database `db-carboncalc` exists
+- Verify MySQL is running
+- Check credentials in application.properties
+- Ensure database exists
 
-### Port 8089 Already in Use
-- Stop the previous instance
-- Or change port in application.properties to 8090
+### Port Already in Use
+- Stop previous instance (Ctrl+C)
+- Or change port to 8090
 
----
-
-## 📝 Notes
-
-- The application uses **session-based authentication**
-- Passwords are encrypted with **BCrypt**
-- Default users are created automatically from `data.sql`
-- All routes are now accessible (Spring Security allows all)
+### Application Won't Start
+```bash
+mvn clean install
+mvn spring-boot:run
+```
 
 ---
 
-**Ready to test! 🎉**
+## 📝 Technical Info
+
+- **Packaging:** WAR for JSP support
+- **Authentication:** Session-based
+- **Database:** MySQL with JPA
+- **View:** JSP pages
+
+---
+
+**Enjoy! 🎉**
