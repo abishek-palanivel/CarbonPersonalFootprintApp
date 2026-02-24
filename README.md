@@ -62,6 +62,10 @@ mvn spring-boot:run
 - Email: admin@cpfa.com
 - Password: admin123
 
+## Default User Credentials
+- Email: user@cpfa.com
+- Password: user123
+
 ## User Roles
 - **USER**: Can calculate emissions, view history, take surveys
 - **ADMIN**: Full access to all users, logs, and surveys

@@ -25,7 +25,11 @@ Open browser: http://localhost:8089
 - Email: admin@cpfa.com
 - Password: admin123
 
-### Create User Account
+### Test User Account
+- Email: user@cpfa.com
+- Password: user123
+
+### Create Your Own Account
 - Click "Register" on homepage
 - Fill in your details
 - Login with your credentials
