@@ -2,7 +2,47 @@
 
 A Spring Boot web application for tracking and calculating personal carbon emissions.
 
-## Features
+## 🚀 Quick Start
+
+### 1. Setup Database
+```sql
+CREATE DATABASE `db-carboncalc`;
+```
+
+Or use the provided script:
+```bash
+mysql -u root -p < setup-database.sql
+```
+
+### 2. Update Password
+Edit `src/main/resources/application.properties`:
+```properties
+spring.datasource.password=YOUR_MYSQL_PASSWORD
+```
+
+### 3. Run Application
+```bash
+mvn spring-boot:run
+```
+
+### 4. Access Application
+Open browser: **http://localhost:8089**
+
+---
+
+## 👤 Login Credentials
+
+### Regular User
+- **Email:** user@cpfa.com
+- **Password:** user123
+
+### Administrator
+- **Email:** admin@cpfa.com
+- **Password:** admin123
+
+---
+
+## ✨ Features
 
 ### User Features
 - User registration and login
@@ -20,7 +60,9 @@ A Spring Boot web application for tracking and calculating personal carbon emiss
 - View all survey responses
 - Dashboard with system-wide statistics
 
-## Technologies Used
+---
+
+## 🛠️ Technologies Used
 - Spring Boot 4.0.1
 - Spring Security
 - Spring Data JPA
@@ -29,48 +71,9 @@ A Spring Boot web application for tracking and calculating personal carbon emiss
 - Lombok
 - BCrypt Password Encryption
 
-## Setup Instructions
+---
 
-### Prerequisites
-- Java 17 or higher
-- MySQL 8.0 or higher
-- Maven
-
-### Database Setup
-1. Create a MySQL database:
-```sql
-CREATE DATABASE `db-carboncalc`;
-```
-
-2. Update database credentials in `src/main/resources/application.properties`:
-```properties
-spring.datasource.username=root
-spring.datasource.password=your_password
-```
-
-### Running the Application
-1. Clone the repository
-2. Navigate to project directory
-3. Run Maven command:
-```bash
-mvn spring-boot:run
-```
-
-4. Access the application at: `http://localhost:8089`
-
-## Default Admin Credentials
-- Email: admin@cpfa.com
-- Password: admin123
-
-## Default User Credentials
-- Email: user@cpfa.com
-- Password: user123
-
-## User Roles
-- **USER**: Can calculate emissions, view history, take surveys
-- **ADMIN**: Full access to all users, logs, and surveys
-
-## Carbon Emission Calculations
+## 📊 Carbon Emission Calculations
 
 ### Transport Emissions (kg CO₂ per km)
 - Car: 0.21
@@ -87,43 +90,48 @@ mvn spring-boot:run
 ### Energy Emissions
 - 0.92 kg CO₂ per kWh
 
-## Project Structure
+---
+
+## 📁 Project Structure
 ```
 src/
 ├── main/
 │   ├── java/com/cpfa/
-│   │   ├── config/          # Security & JWT configuration
-│   │   ├── controller/      # Web & REST controllers
-│   │   ├── dto/             # Data Transfer Objects
+│   │   ├── config/          # Security configuration
+│   │   ├── controller/      # Web controllers
 │   │   ├── entity/          # JPA entities
-│   │   ├── enums/           # Enumerations
 │   │   ├── repository/      # Data repositories
 │   │   └── service/         # Business logic
 │   ├── resources/
-│   │   └── application.properties
+│   │   ├── application.properties
+│   │   └── data.sql         # Initial data
 │   └── webapp/WEB-INF/views/  # JSP pages
 └── test/
 ```
 
-## API Endpoints
+---
 
-### Authentication
-- POST `/register` - Register new user
-- POST `/login` - User login
+## 🔧 Troubleshooting
 
-### User Endpoints
-- GET `/user/dashboard` - User dashboard
-- GET `/user/calculate` - Calculate emissions form
-- POST `/user/calculate` - Submit calculation
-- GET `/user/history` - View emission history
-- GET `/user/survey` - Survey form
-- POST `/user/survey` - Submit survey
+### Port Already in Use
+Change port in `application.properties`:
+```properties
+server.port=8090
+```
 
-### Admin Endpoints
-- GET `/admin/dashboard` - Admin dashboard
-- GET `/admin/users` - View all users
-- GET `/admin/logs` - View all emission logs
-- GET `/admin/surveys` - View all surveys
+### Database Connection Error
+1. Verify MySQL is running
+2. Check username/password
+3. Ensure database exists
 
-## License
+### Application Won't Start
+```bash
+mvn clean install
+mvn spring-boot:run
+```
+
+---
+
+## 📄 License
 This project is for educational purposes.
+
