@@ -22,6 +22,9 @@ public class AuthServices {
 		if (user.getRole() == null || user.getRole().isEmpty()) {
 			user.setRole("USER");
 		}
+		if (user.getStatus() == null || user.getStatus().isEmpty()) {
+			user.setStatus("ACTIVE");
+		}
 		userRepo.save(user);
 		return "Registered Successfully";
 	}
@@ -42,13 +45,19 @@ public class AuthServices {
 		boolean matches = passwordEncoder.matches(password, user.getPassword());
 		System.out.println("🔓 Password match result: " + matches);
 		
-		if (matches) {
-			System.out.println("✅ Login successful for: " + email);
-			return user;
-		} else {
+		if (!matches) {
 			System.out.println("❌ Password mismatch for: " + email);
 			return null;
 		}
+		
+		// Check if user is suspended
+		if ("SUSPENDED".equals(user.getStatus())) {
+			System.out.println("⛔ User is suspended: " + email);
+			return null;
+		}
+		
+		System.out.println("✅ Login successful for: " + email);
+		return user;
 	}
 	
 	public User findByEmail(String email) {

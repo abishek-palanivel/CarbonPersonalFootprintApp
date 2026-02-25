@@ -30,4 +30,7 @@ public class User {
 	private String email;
 	@Column(name = "role", length = 100)
 	private String role;
+	
+	@Column(name = "status", length = 20)
+	private String status = "ACTIVE"; // ACTIVE, SUSPENDED
 }

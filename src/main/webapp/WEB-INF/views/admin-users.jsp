@@ -21,6 +21,18 @@
         .badge { padding: 5px 10px; border-radius: 5px; font-size: 0.9em; }
         .badge-admin { background: #dc3545; color: white; }
         .badge-user { background: #667eea; color: white; }
+        .badge-active { background: #28a745; color: white; }
+        .badge-suspended { background: #ffc107; color: #333; }
+        .btn { padding: 8px 15px; border: none; border-radius: 5px; cursor: pointer; text-decoration: none; display: inline-block; font-size: 0.9em; margin: 2px; }
+        .btn-delete { background: #dc3545; color: white; }
+        .btn-delete:hover { background: #c82333; }
+        .btn-suspend { background: #ffc107; color: #333; }
+        .btn-suspend:hover { background: #e0a800; }
+        .btn-activate { background: #28a745; color: white; }
+        .btn-activate:hover { background: #218838; }
+        .alert { padding: 15px; margin-bottom: 20px; border-radius: 5px; }
+        .alert-success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .alert-error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
     </style>
 </head>
 <body>
@@ -34,6 +46,18 @@
     <div class="container">
         <div class="card">
             <h2>All Users</h2>
+            <c:if test="${param.success == 'deleted'}">
+                <div class="alert alert-success">User deleted successfully!</div>
+            </c:if>
+            <c:if test="${param.success == 'status-updated'}">
+                <div class="alert alert-success">User status updated successfully!</div>
+            </c:if>
+            <c:if test="${param.error == 'cannot-delete-self'}">
+                <div class="alert alert-error">You cannot delete your own account!</div>
+            </c:if>
+            <c:if test="${param.error == 'cannot-suspend-self'}">
+                <div class="alert alert-error">You cannot suspend your own account!</div>
+            </c:if>
             <table>
                 <thead>
                     <tr>
@@ -41,23 +65,51 @@
                         <th>Name</th>
                         <th>Email</th>
                         <th>Role</th>
+                        <th>Status</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <c:forEach items="${users}" var="user">
+                    <c:forEach items="${users}" var="u">
                         <tr>
-                            <td>${user.id}</td>
-                            <td>${user.name}</td>
-                            <td>${user.email}</td>
+                            <td>${u.id}</td>
+                            <td>${u.name}</td>
+                            <td>${u.email}</td>
                             <td>
                                 <c:choose>
-                                    <c:when test="${user.role == 'ADMIN'}">
+                                    <c:when test="${u.role == 'ADMIN'}">
                                         <span class="badge badge-admin">ADMIN</span>
                                     </c:when>
                                     <c:otherwise>
                                         <span class="badge badge-user">USER</span>
                                     </c:otherwise>
                                 </c:choose>
+                            </td>
+                            <td>
+                                <c:choose>
+                                    <c:when test="${u.status == 'SUSPENDED'}">
+                                        <span class="badge badge-suspended">SUSPENDED</span>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <span class="badge badge-active">ACTIVE</span>
+                                    </c:otherwise>
+                                </c:choose>
+                            </td>
+                            <td>
+                                <c:if test="${u.id != user.id}">
+                                    <c:choose>
+                                        <c:when test="${u.status == 'SUSPENDED'}">
+                                            <a href="/admin/users/toggle-status/${u.id}" class="btn btn-activate" onclick="return confirm('Activate this user?')">Activate</a>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <a href="/admin/users/toggle-status/${u.id}" class="btn btn-suspend" onclick="return confirm('Suspend this user?')">Suspend</a>
+                                        </c:otherwise>
+                                    </c:choose>
+                                    <a href="/admin/users/delete/${u.id}" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this user?')">Delete</a>
+                                </c:if>
+                                <c:if test="${u.id == user.id}">
+                                    <span style="color: #999; font-style: italic;">Current User</span>
+                                </c:if>
                             </td>
                         </tr>
                     </c:forEach>
