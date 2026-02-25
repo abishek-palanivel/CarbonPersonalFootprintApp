@@ -1,0 +1,79 @@
+═══════════════════════════════════════════════════════════
+    ✅ LOGIN FIXED - DEFAULT USERS WILL BE CREATED!
+═══════════════════════════════════════════════════════════
+
+WHAT WAS FIXED:
+✓ Increased password column length to 255 (for BCrypt)
+✓ Created DataInitializer with CommandLineRunner
+✓ Users are created automatically on startup
+✓ Passwords are properly encrypted with BCrypt
+
+═══════════════════════════════════════════════════════════
+🚀 RESTART THE APPLICATION
+═══════════════════════════════════════════════════════════
+
+1. STOP current application (Ctrl+C)
+
+2. RUN:
+   mvn clean spring-boot:run
+
+3. WATCH the console output for:
+   ✅ Admin user created: admin@cpfa.com / admin123
+   ✅ Test user created: user@cpfa.com / user123
+
+4. OPEN:
+   http://localhost:8089
+
+═══════════════════════════════════════════════════════════
+🔐 LOGIN CREDENTIALS (NOW WORKING!)
+═══════════════════════════════════════════════════════════
+
+ADMIN LOGIN:
+Email: admin@cpfa.com
+Password: admin123
+→ Red themed admin dashboard
+
+USER LOGIN:
+Email: user@cpfa.com
+Password: user123
+→ Blue themed user dashboard
+
+═══════════════════════════════════════════════════════════
+✨ HOW IT WORKS NOW
+═══════════════════════════════════════════════════════════
+
+1. Application starts
+2. DataInitializer runs automatically
+3. Checks if admin@cpfa.com exists
+   - If not, creates admin with encrypted password
+4. Checks if user@cpfa.com exists
+   - If not, creates user with encrypted password
+5. You can now login!
+
+═══════════════════════════════════════════════════════════
+📋 WHAT TO TEST
+═══════════════════════════════════════════════════════════
+
+1. Login as USER (user@cpfa.com / user123)
+   ✓ See blue dashboard
+   ✓ Calculate emissions
+   ✓ View history
+   ✓ Take survey
+
+2. Logout
+
+3. Login as ADMIN (admin@cpfa.com / admin123)
+   ✓ See red dashboard
+   ✓ View all users
+   ✓ View all logs
+   ✓ View all surveys
+
+4. Register a new account
+   ✓ Create your own user
+   ✓ Login with new credentials
+
+═══════════════════════════════════════════════════════════
+
+🎉 LOGIN NOW WORKS! 🎉
+
+Users are created automatically with proper BCrypt encryption!
