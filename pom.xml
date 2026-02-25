@@ -12,6 +12,7 @@
 	<groupId>com.cpfa</groupId>
 	<artifactId>CarbonPersonalFootprintApp</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
 	<name>CarbonPersonalFootprintApp</name>
 	<description>It is a Spring Project which demonstrate Carboon Personal
 		Footprint</description>
@@ -54,10 +55,18 @@
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 		
+		<!-- Tomcat Embedded (provided for WAR) -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		
 		<!-- JSP Support -->
 		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>
 			<artifactId>tomcat-embed-jasper</artifactId>
+			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
