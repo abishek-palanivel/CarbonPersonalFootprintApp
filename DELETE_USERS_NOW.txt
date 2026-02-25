@@ -1,0 +1,66 @@
+═══════════════════════════════════════════════════════════
+    ⚠️  YOU MUST DELETE OLD USERS FIRST!
+═══════════════════════════════════════════════════════════
+
+THE CONSOLE SHOWS:
+"ℹ️  Admin user already exists"
+"ℹ️  Test user already exists"
+
+THIS MEANS: The old users with wrong passwords are still in DB!
+
+═══════════════════════════════════════════════════════════
+🔧 DELETE USERS NOW - COPY AND PASTE THIS
+═══════════════════════════════════════════════════════════
+
+STEP 1: Open PowerShell or Command Prompt
+
+STEP 2: Run MySQL:
+mysql -u root -p
+
+STEP 3: Enter your MySQL password (abi@1234)
+
+STEP 4: Copy and paste these commands ONE BY ONE:
+
+USE db-carboncalc;
+
+DELETE FROM user WHERE email = 'admin@cpfa.com';
+
+DELETE FROM user WHERE email = 'user@cpfa.com';
+
+SELECT * FROM user;
+
+exit;
+
+═══════════════════════════════════════════════════════════
+🚀 AFTER DELETING
+═══════════════════════════════════════════════════════════
+
+1. STOP the Spring Boot app (Ctrl+C in the terminal)
+
+2. RUN again:
+   mvn spring-boot:run
+
+3. NOW you should see:
+   ✅ Admin user created: admin@cpfa.com / admin123
+   ✅ Test user created: user@cpfa.com / user123
+
+4. THEN login will work!
+
+═══════════════════════════════════════════════════════════
+📋 ALTERNATIVE: Drop Entire Database
+═══════════════════════════════════════════════════════════
+
+If the above doesn't work, do this:
+
+mysql -u root -p
+DROP DATABASE `db-carboncalc`;
+CREATE DATABASE `db-carboncalc`;
+exit;
+
+Then restart the app.
+
+═══════════════════════════════════════════════════════════
+
+⚠️  YOU MUST DELETE THE OLD USERS FROM MYSQL! ⚠️
+
+The app cannot delete them - you must do it manually!
