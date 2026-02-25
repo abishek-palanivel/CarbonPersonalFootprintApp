@@ -37,4 +37,8 @@ public class AuthServices {
 	public User findByEmail(String email) {
 		return userRepo.findByEmail(email).orElse(null);
 	}
+	
+	public long getUserCount() {
+		return userRepo.count();
+	}
 }

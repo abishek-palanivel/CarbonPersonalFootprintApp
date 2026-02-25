@@ -74,4 +74,12 @@ public class WebController {
 		session.invalidate();
 		return "redirect:/";
 	}
+	
+	// Debug endpoint to check users
+	@GetMapping("/debug/users")
+	public String debugUsers(Model model) {
+		long count = authService.getUserCount();
+		model.addAttribute("userCount", count);
+		return "debug";
+	}
 }
