@@ -80,6 +80,24 @@ public class WebController {
 	public String debugUsers(Model model) {
 		long count = authService.getUserCount();
 		model.addAttribute("userCount", count);
+		
+		// Get actual users for debugging
+		User admin = authService.findByEmail("admin@cpfa.com");
+		User user = authService.findByEmail("user@cpfa.com");
+		
+		model.addAttribute("adminExists", admin != null);
+		model.addAttribute("userExists", user != null);
+		
+		if (admin != null) {
+			model.addAttribute("adminName", admin.getName());
+			model.addAttribute("adminRole", admin.getRole());
+		}
+		
+		if (user != null) {
+			model.addAttribute("userName", user.getName());
+			model.addAttribute("userRole", user.getRole());
+		}
+		
 		return "debug";
 	}
 }

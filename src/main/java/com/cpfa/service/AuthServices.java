@@ -27,11 +27,28 @@ public class AuthServices {
 	}
 	
 	public User login(String email, String password) {
+		System.out.println("🔍 Login attempt for email: " + email);
 		User user = userRepo.findByEmail(email).orElse(null);
-		if (user != null && passwordEncoder.matches(password, user.getPassword())) {
-			return user;
+		
+		if (user == null) {
+			System.out.println("❌ User not found with email: " + email);
+			return null;
 		}
-		return null;
+		
+		System.out.println("✅ User found: " + user.getName() + " (Role: " + user.getRole() + ")");
+		System.out.println("🔐 Stored password hash: " + user.getPassword().substring(0, 20) + "...");
+		System.out.println("🔑 Attempting to match password...");
+		
+		boolean matches = passwordEncoder.matches(password, user.getPassword());
+		System.out.println("🔓 Password match result: " + matches);
+		
+		if (matches) {
+			System.out.println("✅ Login successful for: " + email);
+			return user;
+		} else {
+			System.out.println("❌ Password mismatch for: " + email);
+			return null;
+		}
 	}
 	
 	public User findByEmail(String email) {
