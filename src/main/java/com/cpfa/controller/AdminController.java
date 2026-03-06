@@ -80,46 +80,7 @@ public class AdminController {
 		model.addAttribute("surveys", surveys);
 		return "admin-surveys";
 	}
-
-
-	@GetMapping("/users/delete/{id}")
-	public String deleteUser(@PathVariable int id, HttpSession session) {
-		User admin = (User) session.getAttribute("user");
-		if (admin == null || !"ADMIN".equals(admin.getRole())) {
-			return "redirect:/login";
-		}
-		// Prevent admin from deleting themselves
-		if (admin.getId() == id) {
-			return "redirect:/admin/users?error=cannot-delete-self";
-		}
-		userRepo.deleteById(id);
-		return "redirect:/admin/users?success=deleted";
-	}
-
-	@GetMapping("/users/toggle-status/{id}")
-	public String toggleUserStatus(@PathVariable int id, HttpSession session) {
-		User admin = (User) session.getAttribute("user");
-		if (admin == null || !"ADMIN".equals(admin.getRole())) {
-			return "redirect:/login";
-		}
-		User user = userRepo.findById(id).orElse(null);
-		if (user != null) {
-			// Prevent admin from suspending themselves
-			if (admin.getId() == id) {
-				return "redirect:/admin/users?error=cannot-suspend-self";
-			}
-			if ("ACTIVE".equals(user.getStatus())) {
-				user.setStatus("SUSPENDED");
-			} else {
-				user.setStatus("ACTIVE");
-			}
-			userRepo.save(user);
-		}
-		return "redirect:/admin/users?success=status-updated";
-	}
-
-}
-
+	
 	@GetMapping("/users/delete/{id}")
 	public String deleteUser(@PathVariable int id, HttpSession session) {
 		User admin = (User) session.getAttribute("user");
@@ -155,3 +116,4 @@ public class AdminController {
 		}
 		return "redirect:/admin/users?success=status-updated";
 	}
+}
